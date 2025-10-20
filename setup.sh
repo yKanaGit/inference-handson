@@ -19,7 +19,7 @@ oc apply -f secret-repo-creds.yaml
 oc apply -f v4-0-config-user-idp-0-file-data.yaml
 oc apply -f applicationset.yaml
 
-sleep 30
+sleep 180
 MAX_USERS=${1:-5}
 for (( i=1; i<=${MAX_USERS}; i++ ))
 do
