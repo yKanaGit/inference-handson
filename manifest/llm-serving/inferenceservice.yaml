@@ -12,6 +12,8 @@ metadata:
   name: qwen3-30b-a3b-thinking-2507-fp8
 spec:
   predictor:
+    nodeSelector:
+      node.kubernetes.io/instance-type: g6e.xlarge
     maxReplicas: 1
     minReplicas: 1
     model:
