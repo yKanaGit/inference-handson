@@ -3,13 +3,13 @@ apiVersion: serving.kserve.io/v1beta1
 kind: InferenceService
 metadata:
   annotations:
-    openshift.io/display-name: Ultralytics-YOLOv8n
+    openshift.io/display-name: Ultralytics-YOLOv8m
     serving.kserve.io/deploymentMode: RawDeployment
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: "2"
   labels:
     opendatahub.io/dashboard: "true"
-  name: yolov8n
+  name: yolov8m
 spec:
   predictor:
     nodeSelector:
@@ -18,10 +18,10 @@ spec:
     maxReplicas: 1
     model:
       name: ""
-      runtime: triton-onnx
+      runtime: openvino-runtime
       modelFormat:
-        name: onnx
-      storageUri: "pvc://model-storage-yolo/yolov8n"
+        name: openvino_ir
+      storageUri: "pvc://model-storage-yolo/yolov8m"
       resources:
         limits:
           nvidia.com/gpu: "1"
