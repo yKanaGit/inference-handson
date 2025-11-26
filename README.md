@@ -34,13 +34,13 @@ lab-user@bastion.559lc.sandbox185.opentlc.com's password:<lab-user's password gi
 ## Step 3: Clone the Repository  
 
 ```shell
-git clone https://github.com/JPishikawa/inference-handson
+git clone https://github.com/yKanaGit/inference-handson
 ```
 
 You should see output similar to this:  
 
 ```
-[lab-user@bastion ~]$ git clone https://github.com/JPishikawa/inference-handson
+[lab-user@bastion ~]$ git clone https://github.com/yKanaGit/inference-handson
 Cloning into 'inference-handson'...
 remote: Enumerating objects: 201, done.
 remote: Counting objects: 100% (201/201), done.
@@ -70,7 +70,7 @@ metadata:
     argocd.argoproj.io/secret-type: repo-creds
 stringData:
   type: git
-  url: https://github.com/JPishikawa/inference-handson.git
+  url: https://github.com/yKanaGit/inference-handson.git
   password: YOUR_GITHUB_ACCESS_TOKEN
   username: git
 ```
