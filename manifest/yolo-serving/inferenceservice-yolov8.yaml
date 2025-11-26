@@ -19,6 +19,8 @@ spec:
     model:
       name: ""
       runtime: triton-onnx
+      modelFormat:
+        name: onnx
       storageUri: "pvc://model-storage-yolo/yolov8n"
       resources:
         limits:
