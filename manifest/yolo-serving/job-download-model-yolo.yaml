@@ -6,14 +6,17 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "1"
 spec:
-  backoffLimit: 4
-  template:
-    spec:
-      containers:
-        - name: job-download-model-yolo
-          image: registry.access.redhat.com/ubi9/python-312:latest
-          imagePullPolicy: IfNotPresent
-          command: ["/bin/bash"]
+  containers:
+    - name: job-download-model-yolo
+      image: registry.access.redhat.com/ubi9/python-312:latest
+      env:
+        - name: HF_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: huggingface-auth
+              key: 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
+      imagePullPolicy: IfNotPresent
+      command: ["/bin/bash"]
           args:
             - -c
             - |
