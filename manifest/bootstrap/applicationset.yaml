@@ -10,47 +10,47 @@ spec:
         elements:
           - cluster: in-cluster
             name: openshift-gitops
-            repoURL: https://github.com/JPishikawa/inference-handson.git
+            repoURL: https://github.com/yKanaGit/inference-handson.git
             targetRevision: main
             path: manifest/openshift-gitops
           - cluster: in-cluster
             name: nvidia-gpu-operator
-            repoURL: https://github.com/JPishikawa/inference-handson.git
+            repoURL: https://github.com/yKanaGit/inference-handson.git
             targetRevision: main
             path: manifest/nvidia-gpu-operator
           - cluster: in-cluster
             name: openshift-nfd
-            repoURL: https://github.com/JPishikawa/inference-handson.git
+            repoURL: https://github.com/yKanaGit/inference-handson.git
             targetRevision: main
             path: manifest/openshift-nfd
           - cluster: in-cluster
             name: oauth
-            repoURL: https://github.com/JPishikawa/inference-handson.git
+            repoURL: https://github.com/yKanaGit/inference-handson.git
             targetRevision: main
             path: manifest/oauth
           - cluster: in-cluster
             name: redhat-ods-operator
-            repoURL: https://github.com/JPishikawa/inference-handson.git
+            repoURL: https://github.com/yKanaGit/inference-handson.git
             targetRevision: main
             path: manifest/redhat-ods-operator
           - cluster: in-cluster
             name: redhat-ods-applications
-            repoURL: https://github.com/JPishikawa/inference-handson.git
+            repoURL: https://github.com/yKanaGit/inference-handson.git
             targetRevision: main
             path: manifest/redhat-ods-applications
           - cluster: in-cluster
             name: llm-serving
-            repoURL: https://github.com/JPishikawa/inference-handson.git
+            repoURL: https://github.com/yKanaGit/inference-handson.git
             targetRevision: main
             path: manifest/llm-serving
           - cluster: in-cluster
             name: yolo-serving
-            repoURL: https://github.com/JPishikawa/inference-handson.git
+            repoURL: https://github.com/yKanaGit/inference-handson.git
             targetRevision: main
             path: manifest/yolo-serving
           - cluster: in-cluster
             name: mobile-report-app
-            repoURL: https://github.com/JPishikawa/inference-handson.git
+            repoURL: https://github.com/yKanaGit/inference-handson.git
             targetRevision: main
             path: manifest/mobile-report-app
   template:
