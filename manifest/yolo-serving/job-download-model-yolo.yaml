@@ -1,0 +1,57 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: job-download-model-yolo
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+spec:
+  backoffLimit: 4
+  template:
+    spec:
+      containers:
+        - name: job-download-model-yolo
+          image: registry.access.redhat.com/ubi9/python-312:latest
+          imagePullPolicy: IfNotPresent
+          command: ["/bin/bash"]
+          args:
+            - -c
+            - |-
+              set -euo pipefail
+              pip install huggingface_hub
+              workdir=$(mktemp -d)
+              hf download Ultralytics/YOLOv8 --include yolov8n.onnx --local-dir "${workdir}"
+              mkdir -p /mnt/model/yolov8n/1
+              cp "${workdir}/yolov8n.onnx" /mnt/model/yolov8n/1/model.onnx
+              cat <<'EOCONFIG' > /mnt/model/yolov8n/config.pbtxt
+              name: "yolov8n"
+              platform: "onnxruntime_onnx"
+              max_batch_size: 1
+              input [
+                {
+                  name: "images"
+                  data_type: TYPE_FP32
+                  format: FORMAT_NCHW
+                  dims: [3, 640, 640]
+                }
+              ]
+              output [
+                {
+                  name: "output0"
+                  data_type: TYPE_FP32
+                  dims: [84, 8400]
+                }
+              ]
+              instance_group [
+                { kind: KIND_GPU }
+              ]
+              EOCONFIG
+              sync
+          volumeMounts:
+            - name: model-storage-yolo
+              mountPath: /mnt
+      volumes:
+        - name: model-storage-yolo
+          persistentVolumeClaim:
+            claimName: model-storage-yolo
+      restartPolicy: Never

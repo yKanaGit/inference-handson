@@ -1,0 +1,31 @@
+---
+apiVersion: serving.kserve.io/v1beta1
+kind: InferenceService
+metadata:
+  annotations:
+    openshift.io/display-name: Ultralytics-YOLOv8n
+    serving.kserve.io/deploymentMode: RawDeployment
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    argocd.argoproj.io/sync-wave: "2"
+  labels:
+    opendatahub.io/dashboard: "true"
+  name: yolov8n
+spec:
+  predictor:
+    nodeSelector:
+      node.kubernetes.io/instance-type: g6.xlarge
+    minReplicas: 1
+    maxReplicas: 1
+    model:
+      name: ""
+      runtime: triton-onnx
+      storageUri: "pvc://model-storage-yolo/yolov8n"
+      resources:
+        limits:
+          nvidia.com/gpu: "1"
+        requests:
+          nvidia.com/gpu: "1"
+    tolerations:
+      - effect: NoSchedule
+        key: nvidia.com/gpu
+        operator: Exists

@@ -44,6 +44,11 @@ spec:
             targetRevision: main
             path: manifest/llm-serving
           - cluster: in-cluster
+            name: yolo-serving
+            repoURL: https://github.com/JPishikawa/inference-handson.git
+            targetRevision: main
+            path: manifest/yolo-serving
+          - cluster: in-cluster
             name: mobile-report-app
             repoURL: https://github.com/JPishikawa/inference-handson.git
             targetRevision: main

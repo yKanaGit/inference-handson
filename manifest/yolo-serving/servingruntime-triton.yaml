@@ -1,0 +1,52 @@
+---
+apiVersion: serving.kserve.io/v1alpha1
+kind: ServingRuntime
+metadata:
+  annotations:
+    opendatahub.io/apiProtocol: REST
+    opendatahub.io/recommended-accelerators: '["nvidia.com/gpu"]'
+    opendatahub.io/serving-runtime-scope: global
+    opendatahub.io/template-display-name: Triton Inference Server for YOLO
+    opendatahub.io/template-name: triton-yolo-runtime
+    openshift.io/display-name: Triton Inference Server for YOLO
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    argocd.argoproj.io/sync-wave: "2"
+  labels:
+    opendatahub.io/dashboard: "true"
+  name: triton-onnx
+spec:
+  annotations:
+    prometheus.io/path: /metrics
+    prometheus.io/port: "8002"
+  containers:
+    - name: kserve-container
+      image: quay.io/modh/nvidia-triton-server:24.03-py3
+      args:
+        - tritonserver
+        - --model-store=/mnt/models
+        - --http-port=8000
+        - --grpc-port=9000
+        - --metrics-port=8002
+        - --log-verbose=1
+      ports:
+        - containerPort: 8000
+          name: http2
+          protocol: TCP
+        - containerPort: 9000
+          name: grpc
+          protocol: TCP
+        - containerPort: 8002
+          name: metrics
+          protocol: TCP
+      volumeMounts:
+        - mountPath: /dev/shm
+          name: shm
+  multiModel: false
+  supportedModelFormats:
+    - name: onnx
+      autoSelect: true
+  volumes:
+    - emptyDir:
+        medium: Memory
+        sizeLimit: 2Gi
+      name: shm
