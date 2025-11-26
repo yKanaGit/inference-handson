@@ -1,0 +1,23 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  name: mobile-report-app
+  labels:
+    app: mobile-report-app
+    component: mobile-report-app
+spec:
+  output:
+    to:
+      kind: ImageStreamTag
+      name: mobile-report-app:latest
+  source:
+    git:
+      uri: https://github.com/yKanaGit/mobile_report_App.git
+      ref: main
+    type: Git
+  strategy:
+    type: Docker
+    dockerStrategy: {}
+  triggers:
+    - type: ConfigChange
+    - type: ImageChange
