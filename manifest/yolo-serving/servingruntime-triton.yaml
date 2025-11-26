@@ -20,7 +20,7 @@ spec:
     prometheus.io/port: "8002"
   containers:
     - name: kserve-container
-      image: quay.io/modh/nvidia-triton-server:24.03-py3
+      image: ghcr.io/kserve/tritonserver:v2.44.0-py3
       args:
         - tritonserver
         - --model-store=/mnt/models
