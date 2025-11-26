@@ -17,29 +17,29 @@ spec:
           args:
             - -c
             - |-
-              set -euo pipefail
-              pip install huggingface_hub
-              python - <<'PYCODE'
-import pathlib
-import shutil
-from huggingface_hub import hf_hub_download
+                set -euo pipefail
+                pip install huggingface_hub
+                python - <<'PYCODE'
+                import pathlib
+                import shutil
+                from huggingface_hub import hf_hub_download
 
-repo_id = "keremberke/yolov8n-onnx"
-filename = "model.onnx"
+                repo_id = "keremberke/yolov8n-onnx"
+                filename = "model.onnx"
 
-target = pathlib.Path("/mnt/model/yolov8n/1/model.onnx")
-target.parent.mkdir(parents=True, exist_ok=True)
+                target = pathlib.Path("/mnt/model/yolov8n/1/model.onnx")
+                target.parent.mkdir(parents=True, exist_ok=True)
 
-downloaded = hf_hub_download(
-    repo_id=repo_id,
-    filename=filename,
-    local_dir=target.parent,
-    local_dir_use_symlinks=False,
-)
-print(f"Downloaded: {downloaded}")
-shutil.copy2(downloaded, target)
-print(f"Copied to: {target}")
-PYCODE
+                downloaded = hf_hub_download(
+                    repo_id=repo_id,
+                    filename=filename,
+                    local_dir=target.parent,
+                    local_dir_use_symlinks=False,
+                )
+                print(f"Downloaded: {downloaded}")
+                shutil.copy2(downloaded, target)
+                print(f"Copied to: {target}")
+                PYCODE
               cat <<'EOCONFIG' > /mnt/model/yolov8n/config.pbtxt
               name: "yolov8n"
               platform: "onnxruntime_onnx"
