@@ -16,7 +16,7 @@ spec:
           command: ["/bin/bash"]
           args:
             - -c
-            - |-
+            - |
                 set -euo pipefail
                 pip install huggingface_hub
                 python - <<'PYCODE'
@@ -40,30 +40,30 @@ spec:
                 shutil.copy2(downloaded, target)
                 print(f"Copied to: {target}")
                 PYCODE
-              cat <<'EOCONFIG' > /mnt/model/yolov8n/config.pbtxt
-              name: "yolov8n"
-              platform: "onnxruntime_onnx"
-              max_batch_size: 1
-              input [
-                {
-                  name: "images"
-                  data_type: TYPE_FP32
-                  format: FORMAT_NCHW
-                  dims: [3, 640, 640]
-                }
-              ]
-              output [
-                {
-                  name: "output0"
-                  data_type: TYPE_FP32
-                  dims: [84, 8400]
-                }
-              ]
-              instance_group [
-                { kind: KIND_GPU }
-              ]
-              EOCONFIG
-              sync
+                cat <<'EOCONFIG' > /mnt/model/yolov8n/config.pbtxt
+                name: "yolov8n"
+                platform: "onnxruntime_onnx"
+                max_batch_size: 1
+                input [
+                  {
+                    name: "images"
+                    data_type: TYPE_FP32
+                    format: FORMAT_NCHW
+                    dims: [3, 640, 640]
+                  }
+                ]
+                output [
+                  {
+                    name: "output0"
+                    data_type: TYPE_FP32
+                    dims: [84, 8400]
+                  }
+                ]
+                instance_group [
+                  { kind: KIND_GPU }
+                ]
+                EOCONFIG
+                sync
           volumeMounts:
             - name: model-storage-yolo
               mountPath: /mnt
