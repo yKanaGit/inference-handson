@@ -6,28 +6,34 @@ metadata:
     opendatahub.io/apiProtocol: REST
     opendatahub.io/recommended-accelerators: '["nvidia.com/gpu"]'
     opendatahub.io/serving-runtime-scope: global
-    opendatahub.io/template-display-name: Triton Inference Server for YOLO
-    opendatahub.io/template-name: triton-yolo-runtime
-    openshift.io/display-name: Triton Inference Server for YOLO
+    opendatahub.io/template-display-name: OpenVINO Model Server for YOLO
+    opendatahub.io/template-name: openvino-yolo-runtime
+    openshift.io/display-name: OpenVINO Model Server for YOLO
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
     argocd.argoproj.io/sync-wave: "2"
   labels:
     opendatahub.io/dashboard: "true"
-  name: triton-onnx
+  name: openvino-runtime
 spec:
-  annotations:
-    prometheus.io/path: /metrics
-    prometheus.io/port: "8002"
+  multiModel: false
+  protocolVersions:
+    - grpc-v2
+    - http-v2
+  supportedModelFormats:
+    - name: openvino_ir
+      autoSelect: true
   containers:
     - name: kserve-container
-      image: ghcr.io/kserve/tritonserver:v2.44.0-py3
+      image: openvino/model_server:2025.2
+      command:
+        - /ovms
       args:
-        - tritonserver
-        - --model-store=/mnt/models
-        - --http-port=8000
-        - --grpc-port=9000
-        - --metrics-port=8002
-        - --log-verbose=1
+        - --model_path=/mnt/models
+        - --model_name={{.Name}}
+        - --port=9000
+        - --rest_port=8000
+        - --target_device=GPU
+        - --log_level=INFO
       ports:
         - containerPort: 8000
           name: http2
@@ -35,18 +41,3 @@ spec:
         - containerPort: 9000
           name: grpc
           protocol: TCP
-        - containerPort: 8002
-          name: metrics
-          protocol: TCP
-      volumeMounts:
-        - mountPath: /dev/shm
-          name: shm
-  multiModel: false
-  supportedModelFormats:
-    - name: onnx
-      autoSelect: true
-  volumes:
-    - emptyDir:
-        medium: Memory
-        sizeLimit: 2Gi
-      name: shm
