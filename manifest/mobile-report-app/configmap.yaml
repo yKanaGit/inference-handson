@@ -6,4 +6,4 @@ metadata:
     app: mobile-report-app
     component: mobile-report-app
 data:
-  YOLO_ENDPOINT: "http://yolo8m-predictor.user1.svc.cluster.local/v1"
+  YOLO_ENDPOINT: "https://yolo8m-predictor.user1.svc.cluster.local/v1"

@@ -5,3 +5,6 @@ metadata:
   labels:
     app: mobile-report-app
     component: mobile-report-app
+spec:
+  lookupPolicy:
+    local: true

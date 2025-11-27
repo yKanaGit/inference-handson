@@ -18,8 +18,8 @@ spec:
     spec:
       containers:
         - name: mobile-report-app
-          image: image-registry.openshift-image-registry.svc:5000/mobile-report-app/mobile-report-app:latest
-          imagePullPolicy: IfNotPresent
+          image: mobile-report-app:latest
+          imagePullPolicy: Always
           env:
             - name: YOLO_ENDPOINT
               valueFrom:
