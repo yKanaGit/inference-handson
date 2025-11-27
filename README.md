@@ -57,7 +57,7 @@ cd inference-handson/
 vi manifest/bootstrap/secret-repo-creds.yaml 
 ```
 
-You need to replace `YOUR_GITHUB_ACCESS_TOKEN` in `manifest/bootstrap/secret-repo-creds.yaml` with your GitHub access token.  
+You need to replace `YOUR_GITHUB_ACCESS_TOKEN` in `manifest/bootstrap/secret-repo-creds.yaml` with your GitHub access token.
 
 ```
 ---
@@ -73,6 +73,13 @@ stringData:
   url: https://github.com/yKanaGit/inference-handson.git
   password: YOUR_GITHUB_ACCESS_TOKEN
   username: git
+```
+
+### Step 4a: Set GitHub token for the mobile-report-app BuildConfig
+`mobile_report_App` リポジトリのクローンにも同じ GitHub トークンが必要です。`manifest/mobile-report-app/secret-github.yaml` の `YOUR_GITHUB_ACCESS_TOKEN` を手元のトークンに置き換えておきます。
+
+```shell
+vi manifest/mobile-report-app/secret-github.yaml
 ```
 
 ## Step 5: Run setup.sh
