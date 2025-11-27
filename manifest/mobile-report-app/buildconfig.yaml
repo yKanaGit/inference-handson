@@ -15,8 +15,6 @@ spec:
       uri: https://github.com/yKanaGit/mobile_report_App.git
       ref: main
     type: Git
-    sourceSecret:
-      name: mobile-report-app-github-token
   strategy:
     type: Docker
     dockerStrategy: {}

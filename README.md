@@ -75,13 +75,6 @@ stringData:
   username: git
 ```
 
-### Step 4a: Set GitHub token for the mobile-report-app BuildConfig
-`mobile_report_App` リポジトリのクローンにも同じ GitHub トークンが必要です。`manifest/mobile-report-app/secret-github.yaml` の `YOUR_GITHUB_ACCESS_TOKEN` を手元のトークンに置き換えておきます。
-
-```shell
-vi manifest/mobile-report-app/secret-github.yaml
-```
-
 ## Step 5: Run setup.sh
 You can pass the number of hands-on user as an argument to the setup script. The default is for 5 users.
 
