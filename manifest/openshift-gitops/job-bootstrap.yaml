@@ -32,7 +32,7 @@ spec:
 
               MACHINESET_REPLICAS=2
               GPU_MACHINESET_REPLICAS=1
-              GPU_MACHINESET_INSTANCE_TYPE=g6.xlarge
+              GPU_MACHINESET_INSTANCE_TYPE=g6e.xlarge
 
               machineset="$(oc get machineset -o jsonpath='{.items[0].metadata.name}' -n openshift-machine-api)"
               machineset_gpu="${machineset}-gpu"

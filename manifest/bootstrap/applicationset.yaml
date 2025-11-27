@@ -44,6 +44,11 @@ spec:
             targetRevision: main
             path: manifest/llm-serving
           - cluster: in-cluster
+            name: vlm-serving
+            repoURL: https://github.com/yKanaGit/inference-handson.git
+            targetRevision: main
+            path: manifest/vlm-serving
+          - cluster: in-cluster
             name: mobile-report-app
             repoURL: https://github.com/yKanaGit/inference-handson.git
             targetRevision: main

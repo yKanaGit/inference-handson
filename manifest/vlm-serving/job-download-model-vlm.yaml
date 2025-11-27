@@ -1,0 +1,34 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: job-download-model-vlm
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+spec:
+  backoffLimit: 4
+  template:
+    spec:
+      containers:
+        - name: job-download-model-vlm
+          image: registry.access.redhat.com/ubi9/python-312:latest
+          imagePullPolicy: IfNotPresent
+          command: ["/bin/bash"]
+          args:
+            - -c
+            - |-
+              pip install huggingface_hub
+              model_dir=$(hf download Qwen/Qwen3-VL-30B-A3B-Thinking-FP8)
+              rm -rf /mnt/model/*
+              cp -L -r ${model_dir} /mnt/model
+              sync
+          # For a simple one-gpu node demo only. This should be removed and a Object Storage, or RWX storage should be used to bind the model-storage to the nodes for model-loading and inferencing.
+          volumeMounts:
+            - name: model-storage-vlm
+              mountPath: /mnt
+      volumes:
+        - name: model-storage-vlm
+          persistentVolumeClaim:
+            claimName: model-storage-vlm
+      # For a simple one-gpu node demo only. This should be removed and a Object Storage, or RWX storage should be used to bind the model-storage to the nodes for model-loading and inferencing.
+      restartPolicy: Never
