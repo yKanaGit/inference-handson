@@ -6,7 +6,6 @@ commonLabels:
 resources:
   - namespace.yaml
   - imagestream.yaml
-  - secret-github.yaml
   - buildconfig.yaml
   - configmap.yaml
   - deployment.yaml
