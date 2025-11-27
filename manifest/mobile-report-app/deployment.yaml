@@ -21,11 +21,8 @@ spec:
           image: image-registry.openshift-image-registry.svc:5000/mobile-report-app/mobile-report-app:latest
           imagePullPolicy: Always
           env:
-            - name: YOLO_ENDPOINT
-              valueFrom:
-                configMapKeyRef:
-                  name: mobile-report-app-config
-                  key: YOLO_ENDPOINT
+            - name: MODEL_URL
+              value: 'http://qwen3-vl-30b-a3b-thinking-fp8-predictor.vlm-serving.svc.cluster.local'
           ports:
             - containerPort: 8080
               name: http
