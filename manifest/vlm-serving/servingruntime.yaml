@@ -24,6 +24,7 @@ spec:
         - --port=8080
         - --model=/mnt/models
         - --served-model-name={{.Name}}
+        - --max-model-len=32768 
       command:
         - python
         - -m
