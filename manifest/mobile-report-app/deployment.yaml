@@ -20,12 +20,6 @@ spec:
         - name: mobile-report-app
           image: image-registry.openshift-image-registry.svc:5000/mobile-report-app/mobile-report-app:latest
           imagePullPolicy: Always
-          env:
-            - name: YOLO_ENDPOINT
-              valueFrom:
-                configMapKeyRef:
-                  name: mobile-report-app-config
-                  key: YOLO_ENDPOINT
           ports:
             - containerPort: 8080
               name: http
