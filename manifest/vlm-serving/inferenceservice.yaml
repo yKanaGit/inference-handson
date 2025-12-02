@@ -38,7 +38,7 @@ spec:
       name: ""
       args:
         - --max-model-len
-        - "131072"
+        - "32768"
         - --gpu_memory_utilization
         - "0.95"
         - --reasoning-parser
