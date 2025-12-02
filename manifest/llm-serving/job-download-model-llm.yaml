@@ -19,13 +19,14 @@ spec:
             - |-
               pip install huggingface_hub
               model_dir=$(hf download Qwen/Qwen3-30B-A3B-Instruct-2507-FP8)
-              rm -rf /mnt/model/*
-              cp -L -r ${model_dir} /mnt/model
+              mkdir -p /mnt/models/model
+              rm -rf /mnt/models/model/*
+              cp -L -r ${model_dir} /mnt/models/model
               sync
           # For a simple one-gpu node demo only. This should be removed and a Object Storage, or RWX storage should be used to bind the model-storage to the nodes for model-loading and inferencing.
           volumeMounts:
             - name: model-storage-llm
-              mountPath: /mnt
+              mountPath: /mnt/models
       volumes:
         - name: model-storage-llm
           persistentVolumeClaim:
