@@ -13,7 +13,6 @@ metadata:
 spec:
   predictor:
     nodeSelector:
-      workload.gpu/role: llm
       node.kubernetes.io/instance-type: g6e.xlarge
     maxReplicas: 1
     minReplicas: 1
