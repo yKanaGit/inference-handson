@@ -109,7 +109,7 @@ https://rhods-dashboard-redhat-ods-applications.apps.DOMAIN/
 ```
 
 
-////memo////
+####memo#####
 251209
 AWS 上のデモ環境で GPU Operator が新しめ（25.x / CUDA 13.0）になっていた
 その状態で RHAIIS の vLLM 0.11 系コンテナ（rhaiis/vllm-cuda-rhel9）を使うと、
