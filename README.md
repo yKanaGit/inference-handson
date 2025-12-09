@@ -109,3 +109,14 @@ https://rhods-dashboard-redhat-ods-applications.apps.DOMAIN/
 ```
 
 
+////memo////
+251209
+AWS 上のデモ環境で GPU Operator が新しめ（25.x / CUDA 13.0）になっていた
+その状態で RHAIIS の vLLM 0.11 系コンテナ（rhaiis/vllm-cuda-rhel9）を使うと、
+CDI 有効化（.spec.cdi.enabled: true）＋現行バージョンの組み合わせで
+Error 803: system has unsupported display driver / cuda driver combination
+が発生していた
+
+ClusterPolicy.spec.cdi.enabled: false にすることで、従来のデバイスプラグイン方式に戻り、
+以前と同じような GPU の見え方になり、vLLM 0.11 + Qwen3-VL も正常稼働するようになった
+
