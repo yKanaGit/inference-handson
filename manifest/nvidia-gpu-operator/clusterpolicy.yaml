@@ -69,6 +69,8 @@ spec:
     enabled: true
   nodeStatusExporter:
     enabled: true
+  cdi:
+    enabled: false
   mig:
     strategy: single
   toolkit:
