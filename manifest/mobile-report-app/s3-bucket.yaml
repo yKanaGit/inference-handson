@@ -1,0 +1,19 @@
+apiVersion: s3.services.k8s.aws/v1alpha1
+kind: Bucket
+metadata:
+  name: mobile-report-app-md
+  labels:
+    app: mobile-report-app
+    component: mobile-report-app
+spec:
+  name: mobile-report-app-md
+  versioningConfiguration:
+    status: Enabled
+  tagging:
+    tagSet:
+      - key: app
+        value: mobile-report-app
+      - key: purpose
+        value: mobile-report-markdown
+      - key: managed-by
+        value: gitops
