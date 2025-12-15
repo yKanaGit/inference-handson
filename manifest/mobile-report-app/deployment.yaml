@@ -33,4 +33,11 @@ spec:
             limits:
               cpu: 500m
               memory: 512Mi
+          volumeMounts:
+            - name: md-storage
+              mountPath: /data/reports
+      volumes:
+        - name: md-storage
+          persistentVolumeClaim:
+            claimName: mobile-report-app-md
       restartPolicy: Always
