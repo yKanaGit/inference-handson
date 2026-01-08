@@ -41,8 +41,6 @@ spec:
         - "131072"
         - --gpu_memory_utilization
         - "0.95"
-        - --reasoning-parser
-        - "deepseek_r1"
       resources:
         limits:
           nvidia.com/gpu: "1"
