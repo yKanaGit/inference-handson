@@ -109,18 +109,43 @@ https://rhods-dashboard-redhat-ods-applications.apps.DOMAIN/
 ```
 
 
-####memo#####
-251209
-AWS 上のデモ環境で GPU Operator が新しめ（25.x / CUDA 13.0）になっていた
-その状態で RHAIIS の vLLM 0.11 系コンテナ（rhaiis/vllm-cuda-rhel9）を使うと、
-CDI 有効化（.spec.cdi.enabled: true）＋現行バージョンの組み合わせで
+## 251209
+
+AWS 上のデモ環境において、GPU Operator が比較的新しいバージョン  
+（25.x / CUDA 13.0）になっていた。
+
+その状態で RHAIIS の vLLM 0.11 系コンテナ  
+（`rhaiis/vllm-cuda-rhel9`）を使用したところ、  
+以下の組み合わせでエラーが発生していた。
+
+- CDI 有効化  
+  - `.spec.cdi.enabled: true`
+- 現行バージョンの GPU Operator / CUDA
+
+### 発生したエラー
+
+```
 Error 803: system has unsupported display driver / cuda driver combination
-が発生していた
+```
 
-ClusterPolicy.spec.cdi.enabled: false にすることで、従来のデバイスプラグイン方式に戻り、
-以前と同じような GPU の見え方になり、vLLM 0.11 + Qwen3-VL も正常稼働するようになった
+### 対応内容
 
-#####
-OpenWEB UIの埋め込みモデルは以下に変更
-sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2
+`ClusterPolicy.spec.cdi.enabled` を `false` に設定することで、  
+従来の **デバイスプラグイン方式** に戻した。
+
+その結果、
+
+- GPU の認識が以前と同様の状態に戻る
+- vLLM 0.11 + Qwen3-VL が正常稼働
+
+することを確認した。
+
+---
+
+### 追加変更点
+
+OpenWEB UI の埋め込みモデルを以下に変更した。
+
+- `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2`
+
 
