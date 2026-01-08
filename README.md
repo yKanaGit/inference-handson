@@ -144,7 +144,7 @@ Error 803: system has unsupported display driver / cuda driver combination
 
 ### 追加変更点
 
-OpenWEB UI の埋め込みモデルを以下に変更した。
+OpenWEB UI の埋め込みモデルを以下に変更してください。
 
 - `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2`
 
