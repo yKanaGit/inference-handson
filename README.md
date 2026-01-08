@@ -120,3 +120,7 @@ Error 803: system has unsupported display driver / cuda driver combination
 ClusterPolicy.spec.cdi.enabled: false にすることで、従来のデバイスプラグイン方式に戻り、
 以前と同じような GPU の見え方になり、vLLM 0.11 + Qwen3-VL も正常稼働するようになった
 
+#####
+OpenWEB UIの埋め込みモデルは以下に変更
+sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2
+
